@@ -1,0 +1,59 @@
+% Define the position of the UAV
+x0 = input("initial x-axis position UAV : ");
+y0 = input("initial y-axis position UAV: ");
+z0 = input("initial z-axis position UAV: ");
+
+% Define the position of the antenna
+
+x1 = input("initial x-axis position antenna :");
+y1 = input("initial y-axis position antenna: ");
+z1 = input("initial z-axis position antenna: ");
+
+vector=[x0-x1,y0-y1,z0-z1];
+
+initial_elevation= atan2(vector(3),sqrt(vector(1)^2 + vector(2)^2));
+initial_azimuthal = atan2(vector(2), vector(1));
+elevation_degrees =initial_elevation * 180/pi;
+azimuthal_degrees =initial_azimuthal * 180/pi;
+
+% Define the initial time and final time
+ti = input("initial time : ");
+tf = input("final time : ");
+T = tf - ti;
+
+% Define the equation of motion wrt variable 't'
+x = 3*t;
+y = 4^t;
+z = 5*tan(t);
+
+% Define the velocity at a time 't'
+Vx = diff(x,t);
+Vy = diff(y,t);
+Vz = diff(z,t);
+
+% Define the functions for the respective equation of motion and velocities
+X = x.subs(t,T);
+Y = y.subs(t,T);
+Z = z.subs(t,T);
+VX = Vx.subs(t,T);
+VY = Vy.subs(t,T);
+VZ = Vz.subs(t,T);
+
+% Setting polar coordinates of the UAV
+r = sqrt((x)^2 + (y)^2 + (z)^2);
+final_elevation = acos(sqrt((x)^2 + (y)^2)/r);
+final_azimuthal= acos(x/(r * cos(phi_f)));
+
+% Computing the azimuthal and altitudnal angle moved
+THETA = theta.subs(t,T);
+PHI = phi.subs(t,T);
+OMEGA1 = omega1.subs(t,T);
+OMEGA2 = omega2.subs(t,T);
+
+% Starting the tracking of UAV
+disp("final coordinates of the UAV is : ")
+X; Y; Z;
+disp()
+disp("final velocity of the UAV is : ")
+VX; VY; VZ;
+dsip()
